@@ -2,11 +2,11 @@
 
 ##Overview
 
-Swift Look At is a custom animation node for unreal engine. It is similary to the built-in equivalent, but behaves more accurately and naturally.
+Swift Look At is an custom animation node for unreal engine. It is similary to the built-in equivalent, but behaves more accurately and naturally.
 
-##Feature
+##Features
 
-* Keep the frame specified in bone space from rolling while rotating it facing the target, so it can behave more naturally.
+* Keep the frame specified by user from rolling while rotating it facing the target, so it can behave more naturally.
 * Contrary to the built-in equivalent, Swift Look At applying alpha first, then clamp the rotation, which ensures it is more accurate.
 * Visual debugging information is very rich and intuitive, which is convenient for users to locate problems.
 
