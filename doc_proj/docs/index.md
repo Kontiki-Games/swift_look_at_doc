@@ -1,4 +1,4 @@
-#Welcome to Swift Look At Manual copyright 
+#Welcome to Swift Look At Manual
 
 ##Overview
 
