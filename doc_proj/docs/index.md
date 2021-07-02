@@ -2,7 +2,7 @@
 
 ##Overview
 
-Swift Look At is an custom animation node for Unreal Engine. It is similary to the built-in equivalent, but behaves more accurately and naturally.
+Swift Look At is a custom animation node for Unreal Engine. It is similary to the built-in equivalent, but behaves more accurately and naturally.
 
 ##Features
 
@@ -12,7 +12,7 @@ Swift Look At is an custom animation node for Unreal Engine. It is similary to t
 
 ##Quick Start
 
-* Open/Create a animation blue print firstly.
+* Open/Create an animation blue print firstly.
 * Before we set up the nodes, we first need to determine which bones need to be controlled and their axes.
 * For the current example, our goal is to keep mannequin's head always in the direction of the target. Therefore, we determined three bones as control objects: spine01, spine03 and head.
 * Then we can insert the first node into the proper place of the graph.
