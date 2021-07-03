@@ -2,32 +2,32 @@
 
 ##Overview
 
-Swift Look At is a custom LookAt animation node for Unreal Engine. It is similary to the built-in equivalent, but more accurately and naturally.
+*Swift Look At* is a custom LookAt animation node for Unreal Engine. It is similary to the built-in equivalent, but more accurately and naturally.
 
 ##Features
 
 * Keep the control target from rolling while rotating it to face the target, so it can behave more naturally.
-* Contrary to the built-in equivalent, Swift Look At applying alpha first, then clamp the rotation, which ensures it is more accurate.
+* Contrary to the built-in equivalent, *Swift Look At* applying alpha first, then clamp the rotation, which ensures it is more accurate.
 * Visual debugging information is very rich and intuitive, which is convenient for users to locate problems.
 
 ##Quick Start
 
 In the following example, we will control Mannequin and make him look at the target we specified.
 
-* We want Mannequin to have more natural motion, so we apply multiple nodes to his skeleton in a chain to approach this goal. Here we choose Spine01, Spine03 and Head.
+* We want Mannequin to have more natural motion, so we apply multiple nodes to his skeleton in a chain to approach this goal. Here we choose **Spine01**, **Spine03** and **Head**.
 
 ![1_selected_bones](img/1_selected_bones.jpg)
 
-* Before we dive into it, let me introduce basic idea of Swift Look At node to work. We can image it as a virtual fixture which clamps the target bone that we want to control. Then through calculation, we rotate the virtual fixture turn to adjust the bone’s orientation.   
-Ok, let’s get started. Firstly, we insert a Swift Look At node into an animation blueprint and set modified bone property to the **Head** bone. 
+* Before we dive into it, let me introduce basic idea of the *Swift Look At* node how to work. We can image it as a virtual fixture which clamps the target bone that we want to control. Then through calculation, we rotate the virtual fixture and in turn the bone’s orientation is adjusted.   
+Ok, let’s get started. Firstly, we insert a *Swift Look At* node into an animation blueprint and set modified bone property to the **Head** bone. 
 
 ![2_create_node](img/2_create_node.jpg)
 
-* Then, we define the virtual fixture through the node’s ForwardAxis and UpAxis. The ForwardAxis is the forward direction of the virtual fixture, which we want to point the target in the final. The UpAxis is the up direction of the virtual fixture, which tries its best to keep the fixture from roll type rotation; it is optional.  
-We can open the Skeleton panel of the Persona to watch the Head bone’s coordinate system. You would see the green axis pointing along the forward direction of the face（R, G, B）-- (0, 1, 0), the red axis orienting to the up direction of the head(R, G, B) -- (1, 0, 0). so we set the node property ForwardAxis to (0, 1, 0) and UpAxis to  (1, 0, 0) and both of them are in local space.
+* Then, we define the virtual fixture through the node’s *Look At Axis* and *Look Up Axis*. The *Look At Axis* is the forward direction of the virtual fixture, which we want to point the target in the final. The *Look Up Axis* is the up direction of the virtual fixture, which tries its best to keep the fixture from roll type rotation; it is optional.  
+We can open the Skeleton panel of the *Persona* to watch the **Head** bone’s coordinate system. You would see the green axis pointing along the forward direction of the face（R, G, B）-- (0, 1, 0), the red axis orienting to the up direction of the head(R, G, B) -- (1, 0, 0). so we set the node property *Look At Axis* to (0, 1, 0) and *Look Up Axis* to  (1, 0, 0) and both of them are in local space.
 
-    * Note：
-    * We can set the Property Use Look Up Axis to tell the node whether or not to use UpAxis. If we use the UpAxis, we can tell the node whether or not to lock the UpAxis by setting the property UpAxisLocked. Built-in equivalent doesn’t provide this optional, this feature is one of several unique features Swift Look At provided. This feature allows you to use the UpAxis, but doesn’t force you to apply it, just use it as a hint to avoid Roll type rotation.
+    * Note:  
+        We can set the Property *Use Look Up Axis* to tell the node whether or not to use *Look Up Axis*. If we use the *Look Up Axis*, we can tell the node whether or not to lock the *Look Up Axis* by setting the property *Look Up Axis Locked*. Built-in equivalent doesn’t provide this optional, this feature is one of several unique features *Swift Look At* provided. This feature allows you to use the *Look Up Axis*, but doesn’t force you to apply it, just uses it as a hint to avoid Roll type rotation.
 
 ![3_setting_axes](img/3_setting_axes.jpg)
 
@@ -35,7 +35,7 @@ We can open the Skeleton panel of the Persona to watch the Head bone’s coordin
 
 ![4_create_variable](img/4_create_variable.jpg)
 
-* Then we use this variable in the blueprint and connect it to Swift Look At node’s Look At Location pin.
+* Then we use this variable in the blueprint and connect it to *Swift Look At* node’s Look At Location pin.
 
 ![5_connect_variable](img/5_connect_variable.jpg)
 
@@ -43,7 +43,7 @@ We can open the Skeleton panel of the Persona to watch the Head bone’s coordin
 
 ![6_setting_variable](img/6_setting_variable.jpg)
 
-* We can enable the debug draw options to show the connected line between the modified bone and the looking at target and to show the modified ForwardAxis in the meanwhile. 
+* We can enable the debug draw options to show the connected line between the modified bone and the looking at target and to show the modified *Look At Axis* in the meanwhile. 
 
 ![7_target_debug3](img/7_target_debug3.gif)
 
@@ -52,11 +52,11 @@ We can open the Skeleton panel of the Persona to watch the Head bone’s coordin
 * We need to compile the blueprint again after changing it.  
 The results don't look exactly as expected. The character’s head tends to look at the target, but doesn’t point to it exactly. There are two possibilities for this to happen:
     1. Rotation is out of allowed range, it is simply clamped.
-    * The property Alpha is too small to rotate the character enough.
+    * The property *Alpha* is too small to rotate the character enough.
 
 ![9_not_exactly](img/9_not_exactly.jpg)
 
-* We can figure out what happened by turning on the property named Show Clamp Cone.
+* We can figure out what happened by turning on the property named *Show Clamp Cone*.
 
 ![10_show_cone](img/10_show_cone.jpg)
 
@@ -68,39 +68,39 @@ The results don't look exactly as expected. The character’s head tends to look
 
 ![12_clamp_value](img/12_clamp_value.jpg)
 
-* Furthermore, we can set a totally large number to make the ForwardAxis to exactly point the target like this.
+* Furthermore, we can set a totally large number to make the *Look At Axis* to exactly point the target like this.
 
 ![15_show_cone](img/15_show_cone.jpg)
 
 ![14_clamp_value](img/14_clamp_value.jpg)
 
-* We can also enable Show Original Look at Axis property to figure out how much degree of rotation applied on earth.
+* We can also enable *Show Original Look at Axis* property to figure out how much degree of rotation applied on earth.
 
 ![16_enable_origin_forward](img/16_enable_origin_forward.jpg)
 
 ![17_enable_origin_forward](img/17_enable_origin_forward.jpg)
 
-* So we can determine the rotation changed according to the Alpha whether or not in our expectation.  
+* So we can determine the rotation changed according to the *Alpha* whether or not in our expectation.  
 Like this, when clamp is not applied to the rotation:
-    * if we set Alpha to 0.2, the final rotation is original’s 20%;
+    * if we set *Alpha* to 0.2, the final rotation is original’s 20%;
 	
     ![18_alpha_0.2](img/18_alpha_0.2.jpg)
 
     ![18_alpha_0.2_vp](img/18_alpha_0.2_vp.jpg)
 
-    * if we set Alpha to 0.5, the final rotation is original’s 50%;
+    * if we set *Alpha* to 0.5, the final rotation is original’s 50%;
 	
     ![18_alpha_0.5](img/18_alpha_0.5.jpg)
 
     ![18_alpha_0.5_vp](img/18_alpha_0.5_vp.jpg)
 
-    * if we set Alpha to 0.8, the final rotation is original’s 80%;
+    * if we set *Alpha* to 0.8, the final rotation is original’s 80%;
 	
     ![18_alpha_0.8](img/18_alpha_0.8.jpg)
 
     ![18_alpha_0.8_vp](img/18_alpha_0.8_vp.jpg)
 
-* Besides debugging the ForwardAxis, we can draw original and modified UpAxis and the coordinate system of modified bone if we enable the corresponding debug properties.
+* Besides debugging the *Look At Axis*, we can draw original and modified UpAxis and the coordinate system of modified bone if we enable the corresponding debug properties.
 
     * Note: We’d better not enable too many debug draws, otherwise it will be too messy to get useful information.
 
@@ -108,7 +108,7 @@ Like this, when clamp is not applied to the rotation:
 	
 ![19_all_enabled_debug_vp](img/19_all_enabled_debug_vp.jpg)
 
-* We need to add two other nodes for Spine01 and Spine03 according to the method mentioned above. Pay attention, we need to apply control to the Spine01 first, then to the Spine03, final to the Head.
+* We need to add two other nodes for **Spine01** and **Spine03** according to the method mentioned above. Pay attention, we need to apply control to the **Spine01** first, then to the **Spine03**, final to the **Head**.
 
 ![20_final_anim_bp](img/20_final_anim_bp.jpg)
 
@@ -116,8 +116,8 @@ Like this, when clamp is not applied to the rotation:
 
 ![20_final_vp.jpg](img/20_final_vp.jpg)
 
-* What does the property Approximate Clamp mean?
+* What does the property *Approximate Clamp* mean?
 
-    This property only work when we use Look Up Axis and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide Approximate Clamp option which can achieve considerable accurate in most cases.
+    This property only work when we *Use Look Up Axis* and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide Approximate Clamp option which can achieve considerable accurate in most cases.
 
 The End
