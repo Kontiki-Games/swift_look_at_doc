@@ -116,4 +116,8 @@ Like this, when clamp is not applied to the rotation:
 
 ![20_final_vp.jpg](img/20_final_vp.jpg)
 
+* What does the property Approximate Clamp mean?
+
+    This property only work when we use Look Up Axis and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide Approximate Clamp option which can achieve considerable accurate in most cases.
+
 The End
