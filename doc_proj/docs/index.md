@@ -10,6 +10,28 @@
 * Contrary to the built-in equivalent, *Swift Look At* applying alpha first, then clamp the rotation, which ensures it is more accurate.
 * Visual debugging information is very rich and intuitive, which is convenient for users to locate problems.
 
+##Properties
+Property | Description
+------------ | -------------
+Bone to Modify | Name of bone to control. This is the main bone chain to modify from. 
+Look at Target | Target socket to look at. Used if LookAtBone is empty. - You can use  LookAtLocation if you need offset from this point. That location will be used in their local space. 
+Use Look Up Axis | Whether or not to use Look up axis 
+Up Axis Locked | If useLookUpAxis is enabled, whether or not to lock the Up Axis.
+Look Up Axis | If the Up Axis is used, System will try to rotate the bone around it until Forward Axis point to the desired point or be clamped.
+Look at Clamp | Look at Clamp value in degrees - it will clamp the modified look at axis in a cone which aligns to the original forward axis direction.
+Interpolated |  Whether or not interpolated.
+Interpolation Speed | Change rate of the interpolated parameter.
+Approximate Clamp | When the Up Axis is used and is not locked, the computation may be a little heavy, so we can enable this to improve the performance and it can achieve considerable accuracy in most cases.
+Look at Target | Target socket to look at. Used if LookAtBone is empty. - You can use  LookAtLocation if you need offset from this point. That location will be used in their local space. 
+Look at Location | Target Offset. It's in world space if LookAtBone is empty or it is based on LookAtBone or LookAtSocket in their local space
+Show Bone Frame | Whether or not show the axes of the local coordinate system of Joint(Bone)
+Show Original Lock at Axis | Whether or not show the orignal LookAt Axis.
+Show Original Up Axis | Whether or not show the orignal Up Axis.
+Show Modified Look at Axis | Whether or not show the modified LookAt Axis.
+Show Modified Up Axis | Whether or not show the modified Up Axis. 
+Show Clamp Cone | Whether or not show the Clamp Cone. 
+Show Desired Target | Whether or not show desired target. 
+
 ##Quick Start
 
 In the following example, we will control Mannequin and make him look at the target we specified.
@@ -19,12 +41,12 @@ In the following example, we will control Mannequin and make him look at the tar
 ![1_selected_bones](img/1_selected_bones.jpg)
 
 * Before we dive into it, let me introduce the basic idea behine the *Swift Look At* node. We can image it as a virtual fixture which clamps the target bone that we want to control. Then through calculation, we rotate the virtual fixture and in turn the bone’s orientation is adjusted.   
-Ok, let’s get started. Firstly, we insert a *Swift Look At* node into an animation blueprint and set modified bone property to the **Head** bone. 
+Ok, let’s get started. Firstly, we insert a *Swift Look At* node into an animation blueprint and set modified bone property with the **Head** bone. 
 
 ![2_create_node](img/2_create_node.jpg)
 
 * Then, we define the virtual fixture through the node’s *Look At Axis* and *Look Up Axis*. The *Look At Axis* is the forward direction of the virtual fixture, which we want to point the target in the final. The *Look Up Axis* is the up direction of the virtual fixture, which tries its best to keep the fixture from roll type rotation; it is optional.  
-We can open the Skeleton panel of the *Persona* to watch the **Head** bone’s coordinate system. You would see the green axis pointing along the forward direction of the face（R, G, B）-- (0, 1, 0), the red axis orienting to the up direction of the head(R, G, B) -- (1, 0, 0). so we set the node property *Look At Axis* to (0, 1, 0) and *Look Up Axis* to  (1, 0, 0) and both of them are in local space.
+We can open the Skeleton panel of the *Persona* to watch the **Head** bone’s coordinate system. You would see the green axis pointing along the forward direction of the face（R, G, B）-- (0, 1, 0), the red axis orienting to the up direction of the head(R, G, B) -- (1, 0, 0). So we set the node property *Look At Axis* to (0, 1, 0) and *Look Up Axis* to  (1, 0, 0) and both of them are in local space.
 
     * Note:  
         We can set the Property *Use Look Up Axis* to tell the node whether or not to use *Look Up Axis*. If we use the *Look Up Axis*, we can tell the node whether or not to lock the *Look Up Axis* by setting the property *Look Up Axis Locked*. Built-in equivalent doesn’t provide this optional, this feature is one of several unique features *Swift Look At* provided. This feature allows you to use the *Look Up Axis*, but doesn’t force you to apply it, just uses it as a hint to avoid Roll type rotation.
@@ -62,7 +84,7 @@ The results don't look exactly as expected. The character’s head tends to look
 
 ![11_clamp_value](img/11_clamp_value.jpg)
 
-* Oh, the problem is the degree of rotation is out of range. So we can set a large number for the property Look at Clamp and try it again.
+* Oh, the problem is the degree of rotation is out of range. So we can set a larger number for the property Look at Clamp and try it again.
 
 ![13_show_cone](img/13_show_cone.jpg)
 
@@ -119,5 +141,15 @@ Like this, when clamp is not applied to the rotation:
 * What does the property *Approximate Clamp* mean?
 
     This property only work when we use the *Look Up Axis* and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide *Approximate Clamp* option which can achieve considerable accurate in most cases and recommend you use it.
+
+##Showcase
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jM3J4OttxXs" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G_QuKErWYU4" frameborder="0" allowfullscreen></iframe>
+
+##Vedio Tutorial
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jffmkrKuUpg" frameborder="0" allowfullscreen></iframe>
 
 The End
