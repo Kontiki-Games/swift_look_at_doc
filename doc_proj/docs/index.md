@@ -40,7 +40,7 @@ In the following example, we will control Mannequin and make him look at the tar
 
 ![1_selected_bones](img/1_selected_bones.jpg)
 
-* Before we dive into it, let me introduce the basic idea behine the *Swift Look At* node. We can image it as a virtual fixture which clamps the target bone that we want to control. Then through calculation, we rotate the virtual fixture and in turn the bone’s orientation is adjusted.   
+* Before we dive into it, let me introduce the basic idea behine the *Swift Look At* node. We can imagine it as a virtual fixture that clamps the target bone that we want to control. Then through calculation, we rotate the virtual fixture and in turn, the bone’s orientation is adjusted.   
 Ok, let’s get started. Firstly, we insert a *Swift Look At* node into an animation blueprint and set modified bone property with the **Head** bone. 
 
 ![2_create_node](img/2_create_node.jpg)
