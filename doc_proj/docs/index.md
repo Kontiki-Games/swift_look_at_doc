@@ -10,6 +10,12 @@
 * Contrary to the built-in equivalent, *Swift Look At* applying alpha first, then clamp the rotation, which ensures it is more accurate.
 * Visual debugging information is very rich and intuitive, which is convenient for users to locate problems.
 
+##Showcase
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G_QuKErWYU4" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jM3J4OttxXs" frameborder="0" allowfullscreen></iframe>
+
 ##Properties
 Property | Description
 ------------ | -------------
@@ -31,6 +37,10 @@ Show Modified Look at Axis | Whether or not show the modified LookAt Axis.
 Show Modified Up Axis | Whether or not show the modified Up Axis. 
 Show Clamp Cone | Whether or not show the Clamp Cone. 
 Show Desired Target | Whether or not show desired target. 
+
+##Vedio Tutorial
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jffmkrKuUpg" frameborder="0" allowfullscreen></iframe>
 
 ##Quick Start
 
@@ -141,15 +151,3 @@ Like this, when clamp is not applied to the rotation:
 * What does the property *Approximate Clamp* mean?
 
     This property only work when we use the *Look Up Axis* and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide *Approximate Clamp* option which can achieve considerable accurate in most cases and recommend you use it.
-
-##Showcase
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jM3J4OttxXs" frameborder="0" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/G_QuKErWYU4" frameborder="0" allowfullscreen></iframe>
-
-##Vedio Tutorial
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jffmkrKuUpg" frameborder="0" allowfullscreen></iframe>
-
-The End
