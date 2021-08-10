@@ -10,6 +10,15 @@
 * Contrary to the built-in equivalent, *Swift Look At* applying alpha first, then clamp the rotation, which ensures it is more accurate.
 * Visual debugging information is very rich and intuitive, which is convenient for users to locate problems.
 
+##Executable Demo
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EmAo4ZGtHHA" frameborder="0" allowfullscreen></iframe>
+* It is a side by side comparison demo.
+* You can compare the Swift Look At and the Unreal Engine built-in equivalent before they buy it.
+* In order to let you have a complete comparison of the product, the comparison demo exposes as many settings as possible and allows you to switch the target between the camera and the dynamic object and set target movement parameters.
+* [Executable Comparison Demo](https://1drv.ms/u/s!AnOsUaO73ILcbdoOO4HCt4AxJXY)
+
+
 ##Showcase
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/G_QuKErWYU4" frameborder="0" allowfullscreen></iframe>
