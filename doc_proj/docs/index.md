@@ -2,7 +2,7 @@
 
 ##Overview
 
-*Swift Look At* is a custom LookAt animation node for Unreal Engine. It is similary to the built-in equivalent, but more accurately and naturally.
+*Swift Look At* is a custom LookAt animation node for Unreal Engine. It is similar to the built-in equivalent, but more accurately and naturally.
 
 ##Features
 
@@ -13,7 +13,7 @@
 ##Executable Demo
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EmAo4ZGtHHA" frameborder="0" allowfullscreen></iframe>
-* This is a side by side comparison demo.
+* This is a side-by-side comparison demo.
 * You can compare the Swift Look At and the Engine built-in equivalent before buy it.
 * It exposes as many settings as possible to allow you have a complete comparison of the product.
 [download Executable Comparison Demo](https://1drv.ms/u/s!AnOsUaO73ILcbdoOO4HCt4AxJXY)
