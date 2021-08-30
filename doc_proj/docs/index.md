@@ -34,9 +34,10 @@ Use Look Up Axis | Whether or not to use Look up axis
 Up Axis Locked | If useLookUpAxis is enabled, whether or not to lock the Up Axis.
 Look Up Axis | If the Up Axis is used, System will try to rotate the bone around it until Forward Axis point to the desired point or be clamped.
 Look at Clamp | Look at Clamp value in degrees - it will clamp the modified look at axis in a cone which aligns to the original forward axis direction.
+Clamp Ratio | Clamp Ratio is the ratio of dimension in the pitch and yaw directions. 
+Approximate Clamp | Approximate Clamp is only effect when Use Up Axis is enabled and Up Axis Locked is disabled. It is a trade-off between performance and precision.
 Interpolated |  Whether or not interpolated.
 Interpolation Speed | Change rate of the interpolated parameter.
-Approximate Clamp | When the Up Axis is used and is not locked, the computation may be a little heavy, so we can enable this to improve the performance and it can achieve considerable accuracy in most cases.
 Look at Target | Target socket to look at. Used if LookAtBone is empty. - You can use  LookAtLocation if you need offset from this point. That location will be used in their local space. 
 Look at Location | Target Offset. It's in world space if LookAtBone is empty or it is based on LookAtBone or LookAtSocket in their local space
 Show Bone Frame | Whether or not show the axes of the local coordinate system of Joint(Bone)
@@ -159,4 +160,14 @@ Like this, when clamp is not applied to the rotation:
 
 * What does the property *Approximate Clamp* mean?
 
-    This property only work when we use the *Look Up Axis* and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide *Approximate Clamp* option which can achieve considerable accurate in most cases and recommend you use it.
+    This property only works when we use the *Look Up Axis* and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide *Approximate Clamp* option which can achieve considerable accurate in most cases and recommend you use it.
+
+##supplement
+
+* <a name="non_uniform_clamping"></a>Supporting Non-Uniform Clamping (2021-08-31 v1.2)
+
+    This feature allow different clamping range in pitch and yaw directions. To achieve this, a property named Clamp Ratio is added. The clamping cone's bottom surface is an ellipse instead of a circle when this property is not equal to 1. It allows non-uniform clamping in different directions.
+	
+    ***Special thanks to Levitikon217 to give this valuable suggestion and explain why need this feature in detail.***
+	
+![21_non_uniform_clamping.jpg](img/21_non_uniform_clamping.jpg)
