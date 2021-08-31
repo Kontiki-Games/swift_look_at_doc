@@ -166,7 +166,7 @@ Like this, when clamp is not applied to the rotation:
 
 * <a name="non_uniform_clamping"></a>Supporting Non-Uniform Clamping (2021-08-31 v1.2)
 
-    This feature allow different clamping range in pitch and yaw directions. To achieve this, a property named *Clamp Ratio* is added. The clamping cone's bottom surface is an ellipse instead of a circle when this property is not equal to 1. It allows non-uniform clamping in different directions.
+    This feature allow different clamping ranges in pitch and yaw directions. To achieve this, a property named *Clamp Ratio* is added. The clamping cone's bottom surface is an ellipse instead of a circle when this property is not equal to 1. It allows non-uniform clamping in different directions.
 	
     ***Special thanks to Levitikon217 for giving this valuable advice and explaining in detail why this feature is needed.***
 	
