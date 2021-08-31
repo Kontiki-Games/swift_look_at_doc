@@ -162,7 +162,7 @@ Like this, when clamp is not applied to the rotation:
 
     This property only works when we use the *Look Up Axis* and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide *Approximate Clamp* option which can achieve considerable accurate in most cases and recommend you use it.
 
-##supplement
+##Supplement
 
 * <a name="non_uniform_clamping"></a>Supporting Non-Uniform Clamping (2021-08-31 v1.2)
 
