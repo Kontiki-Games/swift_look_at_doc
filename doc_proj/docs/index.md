@@ -2,7 +2,7 @@
 
 ##Overview
 
-*Swift Look At* is a custom LookAt animation node for Unreal Engine. It is similar to the built-in equivalent, but more accurately and naturally.
+*[Swift Look At](https://www.unrealengine.com/marketplace/slug/c3c3d72ef6de497ba9e166cf8c6974c6)* is a custom LookAt animation node for Unreal Engine. It is similar to the built-in equivalent, but more accurately and naturally.
 
 ##Features
 
@@ -171,3 +171,10 @@ Like this, when clamp is not applied to the rotation:
     ***Special thanks to Levitikon217 for giving this valuable advice and explaining in detail why this feature is needed.***
 	
 ![21_non_uniform_clamping.jpg](img/21_non_uniform_clamping.jpg)
+
+* Demo project for ***Metahuman*** (2024-08-05)
+
+    This project demonstrates how to use the Swift Look At plugin in Metahuman.
+	
+	[Metahuman_SLA](https://github.com/Kontiki-Games/Metahuman_SLA/tree/main)
+	![screen_record](img/metahuman_sla2.gif)
