@@ -1,5 +1,4 @@
 site_name: Swift Look At Docs
-site_url: https://kontiki.info/swift_look_at/
 nav:
     - Home: index.md
 
