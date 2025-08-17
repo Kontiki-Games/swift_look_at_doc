@@ -21,11 +21,11 @@ jobs:
         with:
           python-version: 3.x
 
-    - name: Debug current dir
-      run: |
-        echo "PWD=$(pwd)"
-        echo "Files:"
-        ls -la
+      - name: Debug current dir
+        run: |
+          echo "PWD=$(pwd)"
+          echo "Files:"
+          ls -la
 
       - name: Install dependencies
         run: pip install -r requirements.txt
