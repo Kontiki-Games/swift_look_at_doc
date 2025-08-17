@@ -28,7 +28,9 @@ jobs:
           ls -la
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          cd doc_proj
+          pip install -r requirements.txt
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force
