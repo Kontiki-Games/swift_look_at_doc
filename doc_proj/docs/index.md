@@ -1,16 +1,16 @@
-#Welcome to Swift Look At Manual
+# Welcome to Swift Look At Manual
 
-##Overview
+## Overview
 
 *[Swift Look At](https://www.unrealengine.com/marketplace/slug/c3c3d72ef6de497ba9e166cf8c6974c6)* is a custom LookAt animation node for Unreal Engine. It is similar to the built-in equivalent, but more accurately and naturally.
 
-##Features
+## Features
 
 * Keep the control target from rolling while rotating it to face the target, so it can behave more naturally.
 * Contrary to the built-in equivalent, *Swift Look At* applying alpha first, then clamp the rotation, which ensures it is more accurate.
 * Visual debugging information is very rich and intuitive, which is convenient for users to locate problems.
 
-##Executable Demo
+## Executable Demo
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EmAo4ZGtHHA" frameborder="0" allowfullscreen></iframe>
 * This is a side-by-side comparison demo.
@@ -19,23 +19,24 @@
 [download Executable Comparison Demo](https://1drv.ms/u/s!AnOsUaO73ILcbdoOO4HCt4AxJXY)
 
 
-##Showcase
+## Showcase
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/G_QuKErWYU4" frameborder="0" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jM3J4OttxXs" frameborder="0" allowfullscreen></iframe>
 
-##Properties
+## Properties
 Property | Description
 ------------ | -------------
 Bone to Modify | Name of bone to control. This is the main bone chain to modify from. 
-Look at Target | Target socket to look at. Used if LookAtBone is empty. - You can use  LookAtLocation if you need offset from this point. That location will be used in their local space. 
+Look At Axis | System try to change the orientation of this axis to point desired point. 
 Use Look Up Axis | Whether or not to use Look up axis 
 Up Axis Locked | If useLookUpAxis is enabled, whether or not to lock the Up Axis.
 Look Up Axis | If the Up Axis is used, System will try to rotate the bone around it until Forward Axis point to the desired point or be clamped.
 Look at Clamp | Look at Clamp value in degrees - it will clamp the modified look at axis in a cone which aligns to the original forward axis direction.
-Clamp Ratio | Clamp Ratio is the ratio of dimension in the pitch and yaw directions. 
+Clamp Ratio | Clamp Ratio is the ratio of dimension in the pitch and yaw directions. (v1.2)
 Approximate Clamp | Approximate Clamp is only effect when Use Up Axis is enabled and Up Axis Locked is disabled. It is a trade-off between performance and precision.
+Cone Orientation Socket | Optional socket providing a rotation offset for the cone's central axis. The cone axis is derived from the bone's forward direction, then rotated by the local rotation of this socket. (v1.7)
 Interpolated |  Whether or not interpolated.
 Interpolation Speed | Change rate of the interpolated parameter.
 Look at Target | Target socket to look at. Used if LookAtBone is empty. - You can use  LookAtLocation if you need offset from this point. That location will be used in their local space. 
@@ -48,11 +49,11 @@ Show Modified Up Axis | Whether or not show the modified Up Axis.
 Show Clamp Cone | Whether or not show the Clamp Cone. 
 Show Desired Target | Whether or not show desired target. 
 
-##Vedio Tutorial
+## Video Tutorial
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jffmkrKuUpg" frameborder="0" allowfullscreen></iframe>
 
-##Quick Start
+## Quick Start
 
 In the following example, we will control Mannequin and make him look at the target we specified.
 
@@ -162,19 +163,52 @@ Like this, when clamp is not applied to the rotation:
 
     This property only works when we use the *Look Up Axis* and not to lock it. In this mode, clamping the rotation accurately will perform a lot of calculation, so we provide *Approximate Clamp* option which can achieve considerable accurate in most cases and recommend you use it.
 
-##Supplement
+## Maintain History
 
-* <a name="non_uniform_clamping"></a>Supporting Non-Uniform Clamping (2021-08-31 v1.2)
+### Cone Orientation Adjust (2025-08-17 v1.8)
+#### Motivation
 
-    This feature allow different clamping ranges in pitch and yaw directions. To achieve this, a property named *Clamp Ratio* is added. The clamping cone's bottom surface is an ellipse instead of a circle when this property is not equal to 1. It allows non-uniform clamping in different directions.
+The **Swift Look At** node controls joint rotation within a specified range using a **Constraint Cone**. This feature is critical because different joints often require different rotation limits to produce realistic and natural poses.
+
+There are two essential properties of the **Constraint Cone**: its **opening size** and **orientation**. In previous versions, the cone’s opening was controlled by the `Look at Clamp` parameter. Later, the `Clamp Ratio` parameter was introduced, allowing the cone's base to morph from a **circular** to an **elliptical** shape, enabling different limit ranges in different directions.
+
+However, regarding the **orientation** of the cone, users had very limited control. The cone’s direction was fixed to the initial direction of the **Look At Axis**.
+
+This limitation is problematic in some scenarios. For example, when controlling the **eye gaze** of a character, it’s common for the eyeball (or pupil) to not be positioned exactly at the center of the eye mesh—especially in creatures with eyes on the **sides of the head** (see image below). In such cases, the initial **Look At Axis** does not provide a suitable reference for defining the **Constraint Cone**’s orientation. This calls for a more flexible solution.
+![alt text](constraint_cone_no_offset.gif)
+![](Snipaste_2025-08-16_16-03-00.png)
+![](Snipaste_2025-08-16_16-06-36.png)
+
+
+#### Solution
+
+We’ve introduced a new property called **Cone Orientation Socket**, which allows users to control the orientation of the **Constraint Cone**. This socket defines a rotational **offset** from the original **Look At Axis** direction. With this offset, the cone can now point in the desired direction.
+
+Instead of letting users input a rotation value directly, we chose the **Socket-based** approach to support asset reuse: users can create the necessary sockets on their Skeletal Mesh assets and reuse the same animation blueprint across different meshes.
+
+#### Workflow
+
+1. **Create a Socket** in the skeleton of the Skeletal Mesh where you want to control the orientation of the **Constraint Cone**.
+2. Adjust the **Socket’s rotation** to align with your desired cone direction.![alt text](<Snipaste_2025-08-16_16-03-32 1.png>)
+3. Set the `Cone Orientation Socket` property in the **Swift Look At** node to the name of the socket.![alt text](Snipaste_2025-08-16_16-05-06.png)
+4. Set the `Look at Clamp` property to control the cone’s opening size.
+5. Iterate the above steps until the result meets your expectations.![alt text](constraint_cone_with_offset.gif)![alt text](Snipaste_2025-08-16_15-58-53.png)![alt text](<Snipaste_2025-08-16_15-55-16 1.png>)
+
+---
+
+### Demo project for ***Metahuman*** (2024-08-05)
+
+This project demonstrates how to use the Swift Look At plugin in Metahuman.
 	
-    ***Special thanks to Levitikon217 for giving this valuable advice and explaining in detail why this feature is needed.***
+[Metahuman_SLA](https://github.com/Kontiki-Games/Metahuman_SLA/tree/main)
+![screen_record](img/metahuman_sla2.gif)
+
+---
+
+### Non-Uniform Clamping (2021-08-31 v1.2)
+This feature allow different clamping ranges in pitch and yaw directions. To achieve this, a property named *Clamp Ratio* is added. The clamping cone's bottom surface is an ellipse instead of a circle when this property is not equal to 1. It allows non-uniform clamping in different directions.
+	
+*Special thanks to Levitikon217 for giving this valuable advice and explaining in detail why this feature is needed.*
 	
 ![21_non_uniform_clamping.jpg](img/21_non_uniform_clamping.jpg)
 
-* Demo project for ***Metahuman*** (2024-08-05)
-
-    This project demonstrates how to use the Swift Look At plugin in Metahuman.
-	
-	[Metahuman_SLA](https://github.com/Kontiki-Games/Metahuman_SLA/tree/main)
-	![screen_record](img/metahuman_sla2.gif)
