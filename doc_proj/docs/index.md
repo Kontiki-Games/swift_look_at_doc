@@ -175,9 +175,9 @@ There are two essential properties of the **Constraint Cone**: its **opening siz
 However, regarding the **orientation** of the cone, users had very limited control. The cone’s direction was fixed to the initial direction of the **Look At Axis**.
 
 This limitation is problematic in some scenarios. For example, when controlling the **eye gaze** of a character, it’s common for the eyeball (or pupil) to not be positioned exactly at the center of the eye mesh—especially in creatures with eyes on the **sides of the head** (see image below). In such cases, the initial **Look At Axis** does not provide a suitable reference for defining the **Constraint Cone**’s orientation. This calls for a more flexible solution.
-![alt text](constraint_cone_no_offset.gif)
-![](Snipaste_2025-08-16_16-03-00.png)
-![](Snipaste_2025-08-16_16-06-36.png)
+![alt text](img/constraint_cone_no_offset.gif)
+![](img/Snipaste_2025-08-16_16-03-00.png)
+![](img/Snipaste_2025-08-16_16-06-36.png)
 
 
 #### Solution
@@ -189,10 +189,10 @@ Instead of letting users input a rotation value directly, we chose the **Socket-
 #### Workflow
 
 1. **Create a Socket** in the skeleton of the Skeletal Mesh where you want to control the orientation of the **Constraint Cone**.
-2. Adjust the **Socket’s rotation** to align with your desired cone direction.![alt text](<Snipaste_2025-08-16_16-03-32 1.png>)
-3. Set the `Cone Orientation Socket` property in the **Swift Look At** node to the name of the socket.![alt text](Snipaste_2025-08-16_16-05-06.png)
+2. Adjust the **Socket’s rotation** to align with your desired cone direction.![alt text](<img/Snipaste_2025-08-16_16-03-32 1.png>)
+3. Set the `Cone Orientation Socket` property in the **Swift Look At** node to the name of the socket.![alt text](img/Snipaste_2025-08-16_16-05-06.png)
 4. Set the `Look at Clamp` property to control the cone’s opening size.
-5. Iterate the above steps until the result meets your expectations.![alt text](constraint_cone_with_offset.gif)![alt text](Snipaste_2025-08-16_15-58-53.png)![alt text](<Snipaste_2025-08-16_15-55-16 1.png>)
+5. Iterate the above steps until the result meets your expectations.![alt text](img/constraint_cone_with_offset.gif)![alt text](img/Snipaste_2025-08-16_15-58-53.png)![alt text](<img/Snipaste_2025-08-16_15-55-16 1.png>)
 
 ---
 
